@@ -16,16 +16,36 @@ const breadCrumb = (url) => {
     return arrTemporary
 }
 
+module.exports.breadCrumb = breadCrumb
+
 module.exports.index = (req, res) => {
     const path = breadCrumb(req.originalUrl)
 
-    users.find().then((users) => {
-        res.render('./admin/templates/index.pug', {users, path})
-    })
-    
+    res.render('./admin/templates/index.pug', {path})
 }
 
 module.exports.users = (req, res) => {
     const path = breadCrumb(req.originalUrl)
-    res.render('./admin/templates/base.pug', {path})
+
+    // const User = new users({name : 'viet', password : "123"})
+    //     User.save((err) => {
+    //         if (err) {
+    //             return handleError(err);
+    //             // saved
+    //         }
+    //     })
+
+    users.find().then((users) => {
+        res.render('./admin/templates/users.pug', {users, path})
+    })
+}
+
+module.exports.user_create = (req, res) => {
+    const path = breadCrumb(req.originalUrl)
+    res.render('./admin/templates/user.create.pug', {path})
+}
+
+module.exports.post_user_create = (req, res) => {
+    const path = breadCrumb(req.originalUrl)
+    console.log(req.body)
 }

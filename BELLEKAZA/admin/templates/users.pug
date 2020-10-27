@@ -1,0 +1,42 @@
+extends ./base.pug
+
+block title
+    title Site administration | Users
+    link(rel="stylesheet", href="/admin/css/users.css")
+
+block content
+    section.col-sm-10
+        input#myInput.form-control.w-50(type='text', placeholder='Search..')
+        br
+        table#myTable.table.table-sm
+            thead
+                tr
+                    th 
+                        input(type="checkbox", name="")
+                    th USERNAME
+                    th EMAIL
+                    th FIRSTNAME
+                    th LASTNAME
+                    th STAFF STATUS
+            tbody
+                each user in users
+                    tr
+                        td
+                            input(type="checkbox", name="")
+                        td
+                            #user.name
+
+    section.col-sm-2
+        a.btn.btn-dark(href="/admin/users/create") ADD USERS
+
+
+block footer
+    script.
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+        });
+        });
