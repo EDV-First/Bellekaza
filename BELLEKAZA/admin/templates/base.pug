@@ -30,12 +30,12 @@ html(lang="en")
                                     li.breadcrumb-item.active(aria-current='page')= subpath.name
                                 else 
                                     li.breadcrumb-item
-                                        a(href=subpath.path)= subpath.name
+                                        a.text-dark(href=subpath.path)= subpath.name
 
                             
 
                 section.col-sm-4.pt-4.mt-2.display-4(style='font-size: 15px;')
-                    a.text-dark(href="#")  Welcome
+                    span Welcome 
                     span /
                     a.text-dark(href="#")  change password 
                     span /

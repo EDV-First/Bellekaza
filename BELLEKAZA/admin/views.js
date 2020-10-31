@@ -27,14 +27,6 @@ module.exports.index = (req, res) => {
 module.exports.users = (req, res) => {
     const path = breadCrumb(req.originalUrl)
 
-    // const User = new users({name : 'viet', password : "123"})
-    //     User.save((err) => {
-    //         if (err) {
-    //             return handleError(err);
-    //             // saved
-    //         }
-    //     })
-
     users.find().then((users) => {
         res.render('./admin/templates/users.pug', {users, path})
     })
@@ -46,6 +38,35 @@ module.exports.user_create = (req, res) => {
 }
 
 module.exports.post_user_create = (req, res) => {
+
+    const User = new users({
+        username: req.body.username,
+        // firstname: req.body.firstname,
+        // lastname: req.body.lastname,
+        password: req.body.password,
+        passwordconfirmation: req.body.passwordconfirmation,
+        // email : req.body.email,
+        // gender : req.body.gender,
+        // bithday : req.body.bithday,
+        staffstatus : false
+    })
+    User.save((err) => {
+        if (err) {
+            return handleError(err);
+            // saved
+        }
+    })
+
+    res.redirect('/admin/users')
+}
+
+module.exports.user_view = (req, res) => {
     const path = breadCrumb(req.originalUrl)
-    console.log(req.body)
+
+    res.render('./admin/templates/user.view.pug', {path})
+}
+
+module.exports.users_post = (req, res) => {
+    users.deleteMany({ _id : {$in : Object.keys(req.body)}}, function(err) {})
+    res.redirect('/admin/users')
 }

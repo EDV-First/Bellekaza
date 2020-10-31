@@ -16,24 +16,20 @@ block content
                 tbody
                     if errs
                         each err in errs
-                            .alert.alert-danger.alert-dismissible.fade.show(role='alert')
-                                strong= err
-                                button.close(type='button', data-dismiss='alert', aria-label='Close')
-                                    span(aria-hidden='true') &times;
-        
-                    
+                            small.text-danger=err
+                            br
                     tr
                         th(scope='row') 
                             label(for="username") Username:
-                        td 
-                            input#username.w-75(type="text", name="username")
+                        td
+                            input#username.w-75(type="text", name="username", value = values ? values.username : "")
                             br
                             small.text-muted Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
                     tr
                         th(scope='row') 
                             label(for="password") Password:
                         td 
-                            input#password.w-50(type="text", name="password")
+                            input#password.w-50(type="password", name="password")
                             br
                             small.text-muted Your password can’t be too similar to your other personal information.
                             br
@@ -46,7 +42,7 @@ block content
                         th(scope='row') 
                             label(for="passwordconfirmation") Password confirmation:
                         td
-                            input#passwordconfirmation.w-50(type="text", name="passwordconfirmation")
+                            input#passwordconfirmation.w-50(type="password", name="passwordconfirmation")
                     tr
                         th(scope='row') 
                         td

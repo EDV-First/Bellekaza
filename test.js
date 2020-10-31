@@ -1,5 +1,3 @@
-var value = Math.random()
+var obj = {name : 'viet', value : '21', age : 1999}
 
-var result = (value < 0.5) ? "sap" : "ngua"
-
-console.log(result)
+console.log(Object.keys(obj).join(','))

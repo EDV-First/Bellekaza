@@ -5,10 +5,11 @@ const usersSchema = new mongoose.Schema({
     firstname: String,
     lastname: String,
     password: String,
-    password_confirmation: String,
+    passwordconfirmation: String,
     email : String,
     gender : String,
     bithday : String,
+    staffstatus : {type : Boolean, default : false}
 });
 
 // let User = mongoose.model('name Model', schema, 'name collection')

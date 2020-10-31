@@ -7,3 +7,11 @@ th {
 td {
     font-weight: 400;
 }
+
+#myInput {
+    border: 2px solid gray;
+}
+
+#add-user {
+    border-radius: 50px;
+}
