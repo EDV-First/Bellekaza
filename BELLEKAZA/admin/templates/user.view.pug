@@ -1,7 +1,92 @@
 extends ./base.pug
 
 block title
-
+    title Change user | Express admin
+    link(rel="stylesheet", href="/admin/css/user.create.css")
 block content
+    section.col-sm-10
+        
+        form(action="", method="post")
+
+            table.table.table-borderless
+                thead
+                    tr
+                        th(scope='col')
+                            h2 Change user
+                tbody
+                    tr
+                        th(scope='row') 
+                            label(for="username") Username:
+                        td
+                            input#username.w-75(type="text", name="username", value = user.username)
+                            br
+                            small.text-muted Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+                    tr
+                        th(scope='row') 
+                            label(for="password") Password:
+                        td 
+                            p= user.password
+                    tr
+                        th(scope='row') 
+                            label(for="firstname") Firstname:
+                        td 
+                            input#firstname.w-25(type="text", name="firstname", value = user.firstname)
+                    tr
+                        th(scope='row') 
+                            label(for="lastname") Lastname:
+                        td 
+                            input#lastname.w-25(type="text", name="lastname", value = user.lastname)
+                    tr
+                        th(scope='row') 
+                            label(for="email") Email:
+                        td 
+                            input#email.w-50(type="text", name="email", value = user.email)
+                    tr
+                        th(scope='row') 
+                            label(for="gender") Gender:
+                        td 
+                            if user.gender == 'male'
+                                input(type="radio", name="gender", value='male' checked)
+                                |  Male 
+                                input(type="radio", name="gender", value='female')
+                                |  Female 
+                            else if user.gender == 'female'
+                                input(type="radio", name="gender", value='male' )
+                                |  Male 
+                                input(type="radio", name="gender", value='female' checked)
+                                |  Female 
+                            else
+                                input(type="radio", name="gender", value='male' )
+                                |  Male 
+                                input(type="radio", name="gender", value='female')
+                                |  Female 
+                    tr
+                        th(scope='row') 
+                            label(for="gender") Day of birth:
+                        td 
+                            input(type="date", name="birthday", value=user.birthday)
+                    tr
+                        th(scope='row')
+                            label(for="") Active:
+                        td
+                            if user.active
+                                input(type="checkbox", name="active" checked)
+                            else
+                                input(type="checkbox", name="active")
+                    tr
+                        th(scope='row')
+                            label(for="") Staff status:
+                        td
+                            if user.staffstatus
+                                input(type="checkbox", name="staffstatus" checked)
+                            else
+                                input(type="checkbox", name="staffstatus")
+                    tr
+                        th(scope='row') 
+                        td
+                            button.btn.btn-dark(type="submit") Save
+
+    section.col-sm-2
 
 block footer
+    script(src="/admin/js/user.view.js")
