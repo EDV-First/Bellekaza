@@ -36,8 +36,12 @@ block content
                             td
                                 a.text-dark(href="/admin/users/" + user.id)= user.username
                             td
+                                p=user.email
                             td
+                                p=user.firstname
                             td
+                                p=user.lastname
+
                             td.text-center
                                 if user.staffstatus
                                     svg.bi.bi-check-circle-fill.text-primary(width='1em', height='1em', viewbox='0 0 16 16', fill='currentColor', xmlns='http://www.w3.org/2000/svg')

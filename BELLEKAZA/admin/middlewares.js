@@ -1,4 +1,7 @@
 const views = require('./views.js')
+const users = require('./models.js')
+const bcrypt = require('bcrypt');
+
 
 module.exports.validate_create = (req, res, next) => {
     const path = views.breadCrumb(req.originalUrl)
@@ -25,10 +28,5 @@ module.exports.validate_create = (req, res, next) => {
         res.render('./admin/templates/user.create.pug', {errs, path, values : req.body})
         return
     }
-    next()
-}
-
-module.exports.login = (req, res, next) => {
-
     next()
 }

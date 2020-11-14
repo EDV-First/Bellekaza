@@ -35,11 +35,14 @@ html(lang="en")
                             
 
                 section.col-sm-4.pt-4.mt-2.display-4(style='font-size: 15px;')
-                    span Welcome 
+                    if user_name
+                        span Welcome #{user_name}   
+                    else
+                        span Welcome
                     span /
-                    a.text-dark(href="#")  change password 
+                    a.text-dark(href="/admin/changepassword")  change password 
                     span /
-                    a.text-dark(href="#")  log out 
+                    a.text-dark(href="/login/logout")  log out 
                 
             article.row.p-3
                 block content

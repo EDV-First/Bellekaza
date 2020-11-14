@@ -27,7 +27,6 @@ module.exports.index = (req, res) => {
 
 module.exports.users = (req, res) => {
     const path = breadCrumb(req.originalUrl)
-
     users.find().then((users) => {
         res.render('./admin/templates/users.pug', {users, path})
     })
@@ -35,7 +34,7 @@ module.exports.users = (req, res) => {
 
 module.exports.user_create = (req, res) => {
     const path = breadCrumb(req.originalUrl)
-    res.render('./admin/templates/user.create.pug', {path})
+    res.render('./admin/templates/user.create.pug', { path})
 }
 
 module.exports.post_user_create = (req, res) => {
@@ -103,8 +102,37 @@ module.exports.user_view_post = (req, res) => {
     res.redirect('/admin/users')
 }
 
-module.exports.login = (req, res) => {
-    res.cookie("name", "123456")
-    
-    res.render("./admin/templates/login.pug")
+module.exports.change_password = (req, res) => {
+    const path = breadCrumb(req.originalUrl)    
+    res.render('./admin/templates/change_password.pug', {path})
 }
+
+module.exports.post_change_password = (req, res) => {
+    async function getPassword() {
+        const path = breadCrumb(req.originalUrl)    
+        errs = []
+        const user = await users.findById(req.signedCookies.userID)
+        const oldPassword = await bcrypt.compare(req.body.oldpassword, user.password)
+        if (!oldPassword) {
+            errs.push('Old password is not true')
+            res.render('./admin/templates/change_password.pug', {errs, path})
+            return
+        }
+        if ( req.body.newpassword != req.body.confirmnewpassword ) {
+            errs.push('new password or confirm password is not true')
+            res.render('./admin/templates/change_password.pug', {errs, path})
+            return
+        }
+        bcrypt.genSalt(10, function(err, salt) {
+            bcrypt.hash(req.body.newpassword, salt, function(err, hash) {
+                // Store hash in your password DB.
+                users.updateOne({_id : user.id}, {password : hash}, function(err){})
+                res.render('./admin/templates/index.pug', {notification : 'Your password is successfully changed', path})
+            });
+        });
+    }
+    getPassword()
+    
+}
+
+
