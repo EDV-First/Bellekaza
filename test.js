@@ -1,3 +1,5 @@
-var obj = {name : 'viet', value : '21', age : 1999}
+function abc (name, voice = 'haha') {
+    console.log(name, voice)
+}
 
-console.log(Object.keys(obj).join(','))
+abc()

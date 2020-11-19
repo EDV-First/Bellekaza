@@ -5,10 +5,10 @@ const usersSchema = new mongoose.Schema({
     firstname: String,
     lastname: String,
     password: String,
-    passwordconfirmation: String,
     email : String,
     gender : String,
     birthday : String,
+    avatar: String,
     active : {type : Boolean, default : true},
     staffstatus : {type : Boolean, default : false}
 });

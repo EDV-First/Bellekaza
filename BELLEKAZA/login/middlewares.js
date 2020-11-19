@@ -43,12 +43,16 @@ module.exports.requireAuth = (req, res, next) => {
             res.redirect('/login')
             return;
         }
-        else {
+        if (user.staffstatus == false) {
+            res.clearCookie('userID')
+            res.render('./login/templates/login.pug')
+            return;
+        }
+        if(user) {
             users.findById(req.signedCookies.userID, function(err, user) {
                 res.locals.user_name = user.username
                 next()
             })
-            
         }
     })
 }

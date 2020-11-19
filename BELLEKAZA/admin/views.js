@@ -44,14 +44,14 @@ module.exports.post_user_create = (req, res) => {
             // Store hash in your password DB.
             
             const User = new users({
-                username: req.body.username,
+                username: req.body.username.trim(),
                 // firstname: req.body.firstname,
                 // lastname: req.body.lastname,
                 password: hash,
-                passwordconfirmation: hash,
                 // email : req.body.email,
                 // gender : req.body.gender,
                 // bithday : req.body.bithday,
+                avatar : "/" + req.file.path.split("\\").slice("1").join("/"),
                 staffstatus : false
             })
             User.save((err) => {
@@ -89,14 +89,15 @@ module.exports.users_post = (req, res) => {
 module.exports.user_view_post = (req, res) => {
     users.updateOne({_id : req.params.id}, 
         { 
-            username: req.body.username, 
+            username: req.body.username.trim(), 
             firstname : req.body.firstname, 
             lastname : req.body.lastname, 
             email : req.body.email,
             gender : req.body.gender,
             birthday : req.body.birthday,//.split("-").reverse().join("-")
             active : true ? req.body.active == 'on' : false,
-            staffstatus : true ? req.body.staffstatus == 'on' : false
+            staffstatus : true ? req.body.staffstatus == 'on' : false,
+            avatar : "/" + req.file.path.split("\\").slice("1").join("/")
         }, function(err){})
     // console.log(req.body.birthday.split("-").reverse().join("-"))
     res.redirect('/admin/users')
