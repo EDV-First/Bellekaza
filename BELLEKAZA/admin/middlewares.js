@@ -1,6 +1,7 @@
 const views = require('./views.js')
 const users = require('./models.js')
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt')
+const shortid = require('shortid')
 
 
 module.exports.validate_create = (req, res, next) => {
@@ -27,6 +28,13 @@ module.exports.validate_create = (req, res, next) => {
     if (errs.length) {
         res.render('./admin/templates/user.create.pug', {errs, path, values : req.body})
         return
+    }
+    next()
+}
+
+module.exports.sessionId = (req, res, next) => {
+    if (!req.signedCookies.userID) {
+        res.cookie('sessionId', shortid.generate(), {signed : true})
     }
     next()
 }

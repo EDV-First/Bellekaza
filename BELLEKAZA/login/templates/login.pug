@@ -25,6 +25,8 @@ html(lang="en")
                     article
                         form(action="/login", method="post")
                             .form-group
+                                input(type="hidden", name='_csrf', value=csrfToken)
+                            .form-group
                                 label(for='exampleInputEmail1') Username:
                                 input#exampleInputEmail1.form-control.w-50(type='text', aria-describedby='usernameHelp', placeholder='Username', name='username')
                                 small#emailHelp.form-text.text-muted We&apos;ll never share your email with anyone else.

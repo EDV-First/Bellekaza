@@ -16,6 +16,12 @@ const usersSchema = new mongoose.Schema({
 // let User = mongoose.model('name Model', schema, 'name collection')
 let User = mongoose.model('User', usersSchema, 'users')
 
-
-
 module.exports = User
+
+const sessionsSchema = new mongoose.Schema({
+    sessionId : String
+})
+
+let Sessions = mongoose.model('Sessions', sessionsSchema, 'sessions')
+
+module.exports.session = Sessions
