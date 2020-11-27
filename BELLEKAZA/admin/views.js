@@ -34,7 +34,7 @@ module.exports.users = (req, res) => {
 
 module.exports.user_create = (req, res) => {
     const path = breadCrumb(req.originalUrl)
-    res.render('./admin/templates/user.create.pug', { path})
+    res.render('./admin/templates/user.create.pug', {path})
 }
 
 module.exports.post_user_create = (req, res) => {
@@ -51,7 +51,7 @@ module.exports.post_user_create = (req, res) => {
                 // email : req.body.email,
                 // gender : req.body.gender,
                 // bithday : req.body.bithday,
-                avatar : "/" + req.file.path.split("\\").slice("1").join("/"),
+                avatar : req.body.avatar ? "/" + req.file.path.split("\\").slice("1").join("/") : '',
                 staffstatus : false
             })
             User.save((err) => {
